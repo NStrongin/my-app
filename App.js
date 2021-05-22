@@ -1,11 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList, TextInput } from 'react-native';
 
 
 export default function App() {
-
   
+  const [playerTakeMatches, setPlayerTakeMatches] = useState(null);
+
+  const [isValideNumber,setValideNumber] = useState(true);
+
+  const handleInputChange = (text) => { // Check is it number
+    setPlayerTakeMatches(text);
+    isNaN(Number(text)) || text.length == 0 ? setValideNumber(true) : setValideNumber(false);
+  };
+
   const [isStartGame, setStateGame] = useState(false); // check start of game
 
   const [matches, setMatches] = useState(25);// matches
@@ -117,7 +125,23 @@ export default function App() {
         />
       </View>
 
-      <View style={[styles.mainBlocks]}>
+      {/* 
+      <View style={[styles.mainBlocks]}> code for "FUTURE"
+        <TextInput
+          onChangeText={handleInputChange}
+          value={playerTakeMatches}
+          placeholder={isStartGame ? "Number of match" : "Input disable"}
+          editable={isStartGame}
+        />
+
+        <Button
+          title='Take current amount of matches'
+          color="#32a4a8"
+          disabled={isValideNumber}
+        />
+      </View>*/} 
+
+      <View style={[styles.mainBlocks,{flex:0.5}]}>
         <Button
           title='End game'
           color='red'
