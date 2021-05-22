@@ -79,9 +79,9 @@ export default function App() {
   };
 
   const button = [
-    {title:'Take 1 match', color:'#F06960', nameFuction:getOneMarches},
-    {title:'Take 2 match', color:'#49C0F0', nameFuction:getTwoMarches},
-    {title:'Take 3 match', color:'#3CF086', nameFuction:getThreeMarches}
+    {key:'1', title:'Take 1 match', color:'#F06960', nameFuction:getOneMarches},
+    {key:'2', title:'Take 2 match', color:'#49C0F0', nameFuction:getTwoMarches},
+    {key:'3', title:'Take 3 match', color:'#3CF086', nameFuction:getThreeMarches}
   ];
 
   return (
