@@ -37,8 +37,8 @@ export default function App() {
   useEffect( ()=>{ 
     if (matches == 0)
       whoWin();
-    else !isPlayer ? computerTurn() : null; // if nobody won it`s computer`s turn
-  });
+    else !isPlayer ? computerTurn() : null ; // if nobody won it`s computer`s turn
+  },[matches,isPlayer,computer,player]);
 
   const [player, setPlayer] = useState(0);
 
