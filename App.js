@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList } from 'react-native';
+
 
 export default function App() {
+
   
   const [isStartGame, setStateGame] = useState(false); // check start of game
 
@@ -68,6 +70,11 @@ export default function App() {
     }
   };
 
+  const button = [
+    {title:'Take 1 match', color:'#F06960', nameFuction:getOneMarches},
+    {title:'Take 2 match', color:'#49C0F0', nameFuction:getTwoMarches},
+    {title:'Take 3 match', color:'#3CF086', nameFuction:getThreeMarches}
+  ];
 
   return (
     <View style={styles.container}>
@@ -97,23 +104,16 @@ export default function App() {
       </View>
 
       <View style={[styles.mainBlocks]}>
-        <Button
-          title='Take 1 match'
-          color='#F06960'
-          onPress={getOneMarches}
-          disabled={!isStartGame}
-        />
-        <Button
-          title='Take 2 matches'
-            color='#49C0F0'
-            disabled={!isStartGame}
-          onPress={getTwoMarches}
-        />
-        <Button
-          title='Take 3 matches'
-            color='#3CF086'
-            disabled={!isStartGame}
-          onPress={getThreeMarches}
+        <FlatList
+          data={button}
+          renderItem = {({ item }) => (
+            <Button
+              title={item.title}
+              color={item.color}
+              onPress={item.nameFuction}
+              disabled={!isStartGame}
+            />
+          )}
         />
       </View>
 
