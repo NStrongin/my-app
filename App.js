@@ -22,38 +22,28 @@ export default function App() {
     switch(matches){
 
       case 1:
-        computerGetOneMatch();
+        computerGetMatch(1);
         break;
 
       case 2:
-        computer%2 == 0 ? computerGetTwoMatches() : omputerGetOneMatch();
+        computer%2 == 0 ? computerGetMatch(2) : computerGetMatch(1);
         break;
 
       case 3:
-        computer%2 == 0 ? computerGetTwoMatches() : computerGetThreeMatches();
+        computer%2 == 0 ? computerGetMatch(2) : computerGetMatch(3);
         break;
       
       default:
-        computerGetTwoMatches();
+        computerGetMatch(2);
         break;
     }
 
     setIsPlayer(true);
   };
 
-  const computerGetOneMatch = () => { // computer takes one match
-    setComputer(computer + 1);
-    setMatches(matches - 1);
-  };
-
-  const computerGetTwoMatches = () => { // computer takes two matches
-    setComputer(computer + 2);
-    setMatches(matches - 2);
-  };
-
-  const computerGetThreeMatches = () => { // computer takes three matches
-    setComputer(computer + 3);
-    setMatches(matches - 3);
+  const computerGetMatch = (_match) => {
+    setComputer(computer + _match);
+    setMatches(matches - _match);
   };
 
   const whoWin = () => { // check who win
@@ -75,38 +65,26 @@ export default function App() {
   const [playerGo, setPlayerGo] = useState(true);
 
   const getOneMarches = () => { //player takes 1 match
-    if (matches-1 < 0)// check amount of matches
-    {
-      Alert.alert("Matches less then 1")
-    }
-    else{
-      setIsPlayer(false);
-      setMatches(matches-1);
-      setPlayer(player+1);
-    }
+    playerGetMarches(1);
   };
 
   const getTwoMarches = () => { //player take 2 matches
-    if (matches-2 < 0)
-    {
-      Alert.alert("Matches less then "+String(2))
-    }
-    else{
-      setIsPlayer(false);
-      setMatches(matches-2);
-      setPlayer(player+2);
-    }
+    playerGetMarches(2);
   };
 
   const getThreeMarches = () => { //player takes 3 matches
-    if (matches-3 < 0) // check amount of matches
+    playerGetMarches(3);
+  };
+
+  const playerGetMarches = (_match) => { //player takes 3 matches
+    if (matches-_match < 0) // check amount of matches
     {
-      Alert.alert("Matches less then "+String(3))
+      Alert.alert("Matches less then "+String(_match))
     }
     else{
       setIsPlayer(false);
-      setMatches(matches-3);
-      setPlayer(player+3);
+      setMatches(matches-_match);
+      setPlayer(player+_match);
     }
   };
 
