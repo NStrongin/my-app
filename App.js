@@ -19,25 +19,7 @@ export default function App() {
 
   const computerTurn = () => {  // computer`s turn to take matches
     
-    switch(matches){
-
-      case 1:
-        computerGetMatch(1);
-        break;
-
-      case 2:
-        computer%2 == 0 ? computerGetMatch(2) : computerGetMatch(1);
-        break;
-
-      case 3:
-        computer%2 == 0 ? computerGetMatch(2) : computerGetMatch(3);
-        break;
-      
-      default:
-        computerGetMatch(2);
-        break;
-    }
-
+    (matches - 1) % 4 == 1 || (matches - 1) % 4 == 0 ? computerGetMatch(1) : computerGetMatch(3);
     setIsPlayer(true);
   };
 
@@ -61,8 +43,6 @@ export default function App() {
   const [player, setPlayer] = useState(0);
 
   const [computer, setComputer] = useState(0); 
-
-  const [playerGo, setPlayerGo] = useState(true);
 
   const getOneMarches = () => { //player takes 1 match
     playerGetMarches(1);
