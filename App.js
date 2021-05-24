@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, Alert, FlatList, TextInput } from 'react-native';
+import Buttons from './Buttons';
 
 
 export default function App() {
+
+  const MemoizedButtons = React.memo(Buttons);
   
   const [playerTakeMatches, setPlayerTakeMatches] = useState(null);
 
@@ -54,17 +57,17 @@ export default function App() {
 
   const [computer, setComputer] = useState(0); 
 
-  const getOneMarches = () => { //player takes 1 match
+  const getOneMarches = useCallback(() => { //player takes 1 match
     playerGetMarches(1);
-  };
+  });
 
-  const getTwoMarches = () => { //player take 2 matches
+  const getTwoMarches = useCallback(() => { //player take 2 matches
     playerGetMarches(2);
-  };
+  });
 
-  const getThreeMarches = () => { //player takes 3 matches
+  const getThreeMarches = useCallback(() => { //player takes 3 matches
     playerGetMarches(3);
-  };
+  });
 
   const playerGetMarches = (_match) => { //player takes 3 matches
     if (matches-_match < 0) // check amount of matches
@@ -83,6 +86,8 @@ export default function App() {
     {key:'2', title:'Take 2 match', color:'#49C0F0', nameFuction:getTwoMarches},
     {key:'3', title:'Take 3 match', color:'#3CF086', nameFuction:getThreeMarches}
   ];
+
+
 
   return (
     <View style={styles.container}>
@@ -111,19 +116,7 @@ export default function App() {
         </View>
       </View>
 
-      <View style={[styles.mainBlocks]}>
-        <FlatList
-          data={button}
-          renderItem = {({ item }) => (
-            <Button
-              title={item.title}
-              color={item.color}
-              onPress={item.nameFuction}
-              disabled={!isStartGame}
-            />
-          )}
-        />
-      </View>
+      <MemoizedButtons getOneMarches={getOneMarches} getTwoMarches={getTwoMarches} getThreeMarches={getThreeMarches} isStartGame={isStartGame}/>
 
       {/* 
       <View style={[styles.mainBlocks]}> code for "FUTURE"
